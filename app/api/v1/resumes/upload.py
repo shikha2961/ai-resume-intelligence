@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, Form
 from ....services.pdf_parser import extract_text_from_pdf
-from ....services.llm_service import analyse_resume_with_llm
+from ....services.llm_service import analyse_resume_with_gemini
+from ....models.resume_analyse_response import ResumeAnalyseResponse
 
 router = APIRouter(prefix="/api/v1/resumes")
 
@@ -21,9 +22,9 @@ router = APIRouter(prefix="/api/v1/resumes")
 # def jobDescription(jd_text: str):
 #     return "text received"
 
-@router.post("/analyze_resume")
+@router.post("/analyze_resume", response_model=ResumeAnalyseResponse)
 async def analyzeResume(resume: UploadFile = File(...), jd_text: str = Form(...)):
     content = await resume.read()
     resume_text = extract_text_from_pdf(content)
-    analyse_resume_with_llm(resume_text, jd_text)
-    return "analysed successfully"
+    return analyse_resume_with_gemini(resume_text, jd_text)
+    
