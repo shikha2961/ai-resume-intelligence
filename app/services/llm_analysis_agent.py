@@ -28,13 +28,14 @@ def build_prompt(resume_text: str, jd_text: str):
     return prompt
 
 
-def analyse_resume_with_llm(resume_text: str, jd_text: str):
+def analyse_resume_with_gpt(resume_text: str, jd_text: str):
     response = client.responses.create(
         model="gpt-4.1-mini",
         input=build_prompt(resume_text, jd_text)
     )
 
     print(response.output_text)
+
 
 def analyse_resume_with_gemini(resume_text: str, jd_text: str) -> ResumeAnalyseResponse:
     response = geminiClient.models.generate_content(
