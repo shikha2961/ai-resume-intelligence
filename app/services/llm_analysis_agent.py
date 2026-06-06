@@ -3,7 +3,7 @@ import os, json
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-from app.models.resume_analyse_response import ResumeAnalyseResponse
+from app.schemas.resume_analyse_response import ResumeAnalyseResponse
 
 load_dotenv()
 

@@ -15,7 +15,7 @@ def clean_extracted_text(text: str) -> str:
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-    text = "".join(page.get_text() for page in doc)
+    text = "\n\n".join(page.get_text() for page in doc)
     cleaned_text = clean_extracted_text(text)
     return redact_personal_information(cleaned_text)
 
