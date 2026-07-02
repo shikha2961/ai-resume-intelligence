@@ -1,7 +1,6 @@
-from sqlalchemy import create_engine, String
+from sqlalchemy import create_engine, String, ForeignKey, JSON
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
-
-class Base(DeclarativeBase): pass
+from .database import Base
 
 class User(Base):
     __tablename__ = "users"
